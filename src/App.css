@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+.register{
+  width: 400px;
+  height: 400px;
+}
 
 .App-logo {
   height: 40vmin;
