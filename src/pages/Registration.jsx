@@ -1,12 +1,26 @@
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, message } from "antd";
 import { UserOutlined , LockOutlined, MailOutlined } from '@ant-design/icons';
-import React, { useState } from 'react';
 import { Link } from "react-router";
+import { axiosInstance} from '../api/index';
+import { useNavigate } from 'react-router-dom';
 
 export function Register(){
+  const navigate = useNavigate();
+  const onFinish = async (values) =>{
+   try{
+    const response = await axiosInstance.post('/user', values);
+    message.success("User registration successful 🎉");
+    navigate('/login');
+   }catch(err){
+    console.log(err);
+    message.error("User registration failed");
+    throw err;
+   }
+   
+}
     return <div style={{ width: 350, margin: '100px auto', padding: 20, border: '1px solid #ddd', borderRadius: 8}}>
         <h2>Register</h2>
-        <Form name="Register" layout="vertical">
+        <Form name="Register" layout="vertical" onFinish={onFinish}>
             <Form.Item name='name' label='Name'
               rules={[{required:true, message:'Name is required'}]}
             >
@@ -25,10 +39,9 @@ export function Register(){
                         <Input prefix={<LockOutlined />} placeholder="Enter your password" />
                             
                         </Form.Item>
-            <Form.Item htmlType="submit" name='submit'
-            >
+            <Form.Item>
             
-            <Button block type="primary">Register</Button>
+            <Button block type="primary" htmlType="submit">Register</Button>
                 
             </Form.Item>
             <p>Already a user?<Link to='/login'> Login </Link></p>
