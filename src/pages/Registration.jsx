@@ -9,7 +9,7 @@ export function Register(){
   const onFinish = async (values) =>{
    try{
     const response = await axiosInstance.post('/user', values);
-    message.success("User registration successful 🎉");
+    message.success("User registration successful");
     navigate('/login');
    }catch(err){
     console.log(err);
@@ -33,7 +33,7 @@ export function Register(){
                 
             </Form.Item>
             
-                        <Form.Item htmlFor="password" name='password' label='Password'
+                        <Form.Item name='password' label='Password'
                           rules={[{required:true, message:'password is required'}]}
                         >
                         <Input prefix={<LockOutlined />} placeholder="Enter your password" />
