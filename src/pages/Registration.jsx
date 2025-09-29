@@ -8,7 +8,7 @@ export function Register(){
   const navigate = useNavigate();
   const onFinish = async (values) =>{
    try{
-    const response = await axiosInstance.post('/user', values);
+    const response = await axiosInstance.post('/register', values);
     message.success("User registration successful");
     navigate('/login');
    }catch(err){

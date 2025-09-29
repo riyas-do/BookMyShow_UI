@@ -10,9 +10,9 @@ export function Login(){
   const onFinish = async (values) =>{
     try{
       const {data} = await axiosInstance.post('/login',values);
-      console.log(data.success);
       if(data.success){
         message.success(data.message);
+        localStorage.setItem('token', data.data.token);
         setTimeout(() => navigate('/'), 1000);
       }
     }catch(err){
